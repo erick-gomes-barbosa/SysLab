@@ -1,0 +1,3 @@
+id,generic_id,laboratory_id,user_id,laboratory_list
+1,13,,3,"[{""id"": 3, ""enviroment_id"": ""103AC""}, {""id"": 5, ""enviroment_id"": ""105AE""}]"
+2,14,,6,"[{""id"": 3, ""enviroment_id"": ""103AC""}]"
