@@ -1,6 +1,0 @@
-[submodule "syslab-root"]
-	path = syslab-root
-	url = https://github.com/erickWillyan-Baymetrics/syslab-root
-[submodule "syslab-users"]
-	path = syslab-users
-	url = https://github.com/erickWillyan-Baymetrics/syslab-users
