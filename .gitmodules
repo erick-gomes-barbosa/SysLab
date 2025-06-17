@@ -4,3 +4,7 @@
 [submodule "frontend/syslab-users"]
 	path = frontend/syslab-users
 	url = https://github.com/erickWillyan-Baymetrics/syslab-users.git
+
+[submodule "frontend/syslab-home"]
+	path = frontend/syslab-home
+	url = https://github.com/erickWillyan-Baymetrics/syslab-home.git
