@@ -1,0 +1,2 @@
+DROP SCHEMA IF EXISTS utils;
+CREATE SCHEMA utils;
