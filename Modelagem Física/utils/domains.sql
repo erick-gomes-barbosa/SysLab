@@ -1,3 +1,4 @@
+--Schema SYSTEM
 CREATE DOMAIN utils.domain_time_period AS TIME(0) WITH TIME ZONE;
 ALTER DOMAIN utils.domain_time_period
 ADD CONSTRAINT check_time_period
