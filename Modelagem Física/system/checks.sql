@@ -28,3 +28,9 @@ CHECK(
     char_length(VALUE) = 5 AND
     VALUE ~ '^\d{3}[a-z]{2}$'
 );
+
+ALTER TABLE system.laboratory
+ADD CONSTRAINT ck_system_laboratory_opening_before_closing
+CHECK(
+    opening_time<closing_time
+);
