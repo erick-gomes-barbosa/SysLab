@@ -14,3 +14,5 @@ id,type,create_time,desc,children_logs,responsible_user
 13,assosiation,"2025-06-12 14:42:33-03",,"{""log_laboratory_per_user"": 1}",1
 14,assosiation,"2025-06-12 14:43:09-03",,"{""log_laboratory_per_user"": 2}",1
 15,assosiation,"2025-06-12 14:44:00-03",,"{""log_user_login_logout"": 4}",1
+16,assosiation,"2025-06-18 09:14:00-03",,"{""log_assosiation_user_laboratory"": 4}",1
+17,assosiation,"2025-06-18 09:14:05-03",,"{""log_assosiation_user_laboratory"": 5}",1

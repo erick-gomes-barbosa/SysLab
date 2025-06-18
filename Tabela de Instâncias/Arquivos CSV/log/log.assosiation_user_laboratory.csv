@@ -2,3 +2,5 @@ id,generic_id,laboratory_id,user_id,status
 1,10,1,2,granted
 2,11,3,3,granted
 3,12,1,2,revoked
+4,16,4,10,revoked
+5,17,1,10,granted

@@ -1,19 +1,19 @@
 ALTER TABLE system.user
 ADD CONSTRAINT check_system_type_user
 CHECK(
-    VALUE IN('Administrador', 'Aluno', 'Profesor', 'Técnico')
+    type IN('Administrador', 'Aluno', 'Profesor', 'Técnico')
 );
 
 ALTER TABLE system.user
 ADD CONSTRAINT check_system_user_email
 CHECK(
-    VALUE ~ '^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$'
+    email ~ '^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$'
 );
 
 ALTER TABLE system.user
 ADD CONSTRAINT check_password_lenght
 CHECK(
-    char_length(VALUE) = 64
+    char_length(password) = 64
 );
 
 ALTER TABLE system.user
@@ -25,8 +25,8 @@ CHECK(
 ALTER TABLE system.laboratory
 ADD CONSTRAINT ck_enviroment_id
 CHECK(
-    char_length(VALUE) = 5 AND
-    VALUE ~ '^\d{3}[a-z]{2}$'
+    char_length(enviroment_id) = 5 AND
+    enviroment_id ~ '^\d{3}[a-z]{2}$'
 );
 
 ALTER TABLE system.laboratory

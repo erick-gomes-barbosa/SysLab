@@ -7,7 +7,7 @@ CREATE TABLE log.generic(
 
     --Informações genéricas sobre os Logs
     type                utils.log_enum_generic_type NOT NULL,
-    create_time         TIMESTAMP WITH TIME ZONE    NOT NULL DEFAULT CURRENT_TIMESTAMP(),
+    create_time         TIMESTAMP WITH TIME ZONE    NOT NULL DEFAULT CURRENT_TIMESTAMP,
     descri              TEXT                            NULL,
 
     --Informações sobre os Logs Filhos
@@ -23,11 +23,12 @@ CREATE TABLE log.generic(
     CONSTRAINT fk_system_user_id
         FOREIGN KEY (responsible_user)
         REFERENCES system.user(id)
-        ON UPDATE RESTRICT,
-        ON DELETE RESTRICT,
+        ON UPDATE RESTRICT
+        ON DELETE RESTRICT
 )
 
-CREATE TABLE log.users(
+DROP TABLE IF EXISTS log.user
+CREATE TABLE log.user(
     --Chave Primária
     id          INTEGER GENERATED ALWAYS AS IDENTITY,
 
@@ -56,7 +57,7 @@ CREATE TABLE log.users(
     CONSTRAINT uq_log_user_user_id      UNIQUE(user_id)
 )
 
-CREATE TABLE log.laboratories(
+CREATE TABLE log.laboratory(
     --Chave Primária
     id              INTEGER GENERATED ALWAYS AS IDENTITY,
 
@@ -65,7 +66,7 @@ CREATE TABLE log.laboratories(
     laboratory_id   INTEGER NOT NULL,
 
     --Definição da Chave Primária
-    CONSTRAINT pk_log_users     PRIMARY KEY(id),
+    CONSTRAINT pk_log_laboratory     PRIMARY KEY(id),
 
     --Definição das Chaves Estrangeiras
     CONSTRAINT fk_log_generic_id
@@ -75,14 +76,14 @@ CREATE TABLE log.laboratories(
         ON DELETE CASCADE,
     
     CONSTRAINT fk_system_laboratory_id
-        FOREIGN KEY (laboratories_id)
+        FOREIGN KEY (laboratory_id)
         REFERENCES system.laboratory(id)
         ON UPDATE RESTRICT
         ON DELETE RESTRICT,
 
     -- Definição dos Campos Únicos
-    CONSTRAINT uq_log_user_generic_id       UNIQUE(generic_id),
-    CONSTRAINT uq_log_user_laboratories_id  UNIQUE(laboratories_id)
+    CONSTRAINT uq_log_laboratory_generic_id       UNIQUE(generic_id),
+    CONSTRAINT uq_log_laboratory_laboratory_id  UNIQUE(laboratory_id)
 )
 
 CREATE TABLE log.laboratory_per_user(
@@ -98,7 +99,7 @@ CREATE TABLE log.laboratory_per_user(
     user_id         INTEGER NOT NULL,
 
     --Definição da Chave Primária
-    CONSTRAINT pk_log_users     PRIMARY KEY(id),
+    CONSTRAINT pk_log_laboratory_per_user     PRIMARY KEY(id),
 
     --Definição das Chaves Estrangeiras
     CONSTRAINT fk_log_generic_id
@@ -108,7 +109,7 @@ CREATE TABLE log.laboratory_per_user(
         ON DELETE CASCADE,
     
     CONSTRAINT fk_system_laboratory_id
-        FOREIGN KEY (laboratories_id)
+        FOREIGN KEY (laboratory_id)
         REFERENCES system.laboratory(id)
         ON UPDATE RESTRICT
         ON DELETE RESTRICT,
@@ -120,7 +121,7 @@ CREATE TABLE log.laboratory_per_user(
         ON DELETE RESTRICT,
 
     -- Definição dos Campos Únicos
-    CONSTRAINT uq_log_user_generic_id       UNIQUE(generic_id)
+    CONSTRAINT uq_log_laboratory_per_user_generic_id       UNIQUE(generic_id)
 )
 
 CREATE TABLE log.assosiation_user_laboratory(
@@ -136,7 +137,7 @@ CREATE TABLE log.assosiation_user_laboratory(
     user_id         INTEGER NOT NULL,
 
     --Definição da Chave Primária
-    CONSTRAINT pk_log_users     PRIMARY KEY(id),
+    CONSTRAINT pk_log_assosiation_user_laboratory     PRIMARY KEY(id),
 
     --Definição das Chaves Estrangeiras
     CONSTRAINT fk_log_generic_id
@@ -146,7 +147,7 @@ CREATE TABLE log.assosiation_user_laboratory(
         ON DELETE CASCADE,
     
     CONSTRAINT fk_system_laboratory_id
-        FOREIGN KEY (laboratories_id)
+        FOREIGN KEY (laboratory_id)
         REFERENCES system.laboratory(id)
         ON UPDATE RESTRICT
         ON DELETE RESTRICT,
@@ -158,10 +159,10 @@ CREATE TABLE log.assosiation_user_laboratory(
         ON DELETE RESTRICT,
 
     -- Definição dos Campos Únicos
-    CONSTRAINT uq_log_user_generic_id       UNIQUE(generic_id)
+    CONSTRAINT uq_log_assosiation_user_laboratory_generic_id       UNIQUE(generic_id)
 )
 
-CREATE TABLE log.users(
+CREATE TABLE log.user_login_logout(
     --Chave Primária
     id              INTEGER GENERATED ALWAYS AS IDENTITY,
 
@@ -174,7 +175,7 @@ CREATE TABLE log.users(
     user_id         INTEGER NOT NULL,
 
     --Definição da Chave Primária
-    CONSTRAINT pk_log_users     PRIMARY KEY(id),
+    CONSTRAINT pk_log_user_login_logout     PRIMARY KEY(id),
 
     --Definição das Chaves Estrangeiras
     CONSTRAINT fk_log_generic_id
@@ -190,5 +191,5 @@ CREATE TABLE log.users(
         ON DELETE RESTRICT,
 
     -- Definição dos Campos Únicos
-    CONSTRAINT uq_log_user_generic_id   UNIQUE(generic_id)
+    CONSTRAINT uq_log_user_login_logout_generic_id   UNIQUE(generic_id)
 )
