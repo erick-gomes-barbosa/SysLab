@@ -20,12 +20,12 @@ CREATE TABLE system.user (
     departure_time  utils.domain_time_period   NOT NULL,
 
     --Definição das Chaves Primárias
-    CONSTRAINT pk_system_user           PRIMARY KEY (id),
+    CONSTRAINT pk_system_user           PRIMARY KEY(id),
 
     --Definição dos Campos Únicos
     CONSTRAINT uq_system_user_registery UNIQUE (registery),
-    CONSTRAINT uq_system_user_email     UNIQUE (email),
-);
+    CONSTRAINT uq_system_user_email     UNIQUE (email)
+)
 
 CREATE TABLE system.laboratory (
     --Chaves Primárias
@@ -44,7 +44,7 @@ CREATE TABLE system.laboratory (
     CONSTRAINT pk_system_laboratory                 PRIMARY KEY(id),
 
     --Definição dos Campos Únicos
-    CONSTRAINT uq_system_laboratory_enviroment_id   UNIQUE(enviroment_id),
+    CONSTRAINT uq_system_laboratory_enviroment_id   UNIQUE(enviroment_id)
 )
 
 CREATE TABLE system.user_laboratory(
