@@ -1,0 +1,52 @@
+# .github/workflows/database_complete_backup_google_drive.yml
+
+name: Database's Complete Backup on Google Drive
+
+on:
+  pull_request:
+    types: [closed]
+    branches:
+      - main
+
+jobs:
+  backup-completo:
+    # Executa somente se o PR foi realmente mergeado e veio da sua branch de desenvolvimento.
+    if: github.event.pull_request.merged == true && github.event.pull_request.head.ref == 'back-end'
+    
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. Checkout do código da branch main
+      - name: Repository Chckout
+        uses: actions/checkout@v4
+        with:
+          ref: 'main'
+
+      # 2. Instalar cliente do PostgreSQL
+      - name: Install PostgreSQL Client
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y postgresql-client
+
+      # 3. Fazer dump do Banco de Dados
+      - name: PostgreSQL's Database Dump
+        run: pg_dump -h ${{ secrets.PG_HOST }} -U ${{ secrets.PG_USER }} -d ${{ secrets.PG_DATABASE }} -F c -b -v -f backup.sql
+        env:
+          PGPASSWORD: ${{ secrets.PG_PASSWORD }}
+
+      # 4. Gerar timestamp para o nome do arquivo
+      - name: Gerar Timestamp
+        run: echo "TIMESTAMP=$(date +'%Y-%m-%d_%H-%M-%S')" >> $GITHUB_ENV
+
+      # 5. Compactar o código + o dump do banco
+      - name: Arquivar Código e Banco de Dados
+        run: zip -r backup-completo-${{ env.TIMESTAMP }}.zip . -x ".git/*" -x ".github/*"
+
+      # 6. Upload para o Google Drive
+      - name: Upload do Backup para o Google Drive
+        uses: willo32/google-drive-upload-action@v1.3.0
+        with:
+          parent-folder-id: ${{ secrets.DRIVE_FOLDER_ID }}
+          file-name: backup-completo-do-projeto-${{ env.TIMESTAMP }}.zip
+          file-path: ./backup-completo-${{ env.TIMESTAMP }}.zip
+          folder-credentials: ${{ secrets.CLOUD_CREDENTIALS }}
