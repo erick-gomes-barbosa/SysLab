@@ -1,8 +1,8 @@
-id,enviroment_id,qtd_computers,qtd_chairs,television,fan,air_conditioner
-1,"101AA",30,30,true,true,true
-2,"102AB",28,30,false,true,true
-3,"103AC",40,40,true,false,true
-4,"104AD",23,25,false,true,false
-5,"105AE",36,35,true,true,true
-6,"106AF",20,22,false,true,false
-7,"107AG",38,40,true,false,true
+id,enviroment_id,qtd_computers,qtd_chairs,television,fan,air_conditioner,opening_time,closing_time
+1,"101AA",30,30,true,true,true,"08:00:00","22:00:00"
+2,"102AB",28,30,false,true,true,"07:30:00","18:00:00"
+3,"103AC",40,40,true,false,true,"08:00:00","22:00:00"
+4,"104AD",23,25,false,true,false,"13:00:00","21:00:00"
+5,"105AE",36,35,true,true,true,"07:30:00","22:00:00"
+6,"106AF",20,22,false,true,false,"14:00:00","20:00:00"
+7,"107AG",38,40,true,false,true,"08:00:00","21:30:00"
