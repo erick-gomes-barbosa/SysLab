@@ -44,9 +44,9 @@ jobs:
 
       # 6. Upload para o Google Drive
       - name: Upload do Backup para o Google Drive
-        uses: willo32/google-drive-upload-action@v1.1.0
+        uses: lgariv/google-drive-upload-git-action@v1
         with:
-          parent-folder-id: ${{ secrets.DRIVE_FOLDER_ID }}
-          file-name: backup-completo-do-projeto-${{ env.TIMESTAMP }}.zip
-          file-path: ./backup-completo-${{ env.TIMESTAMP }}.zip
-          folder-credentials: ${{ secrets.CLOUD_CREDENTIALS }}
+          credentials: ${{ secrets.CLOUD_CREDENTIALS }}
+          source: ./backup-completo-${{ env.TIMESTAMP }}.zip
+          destination: backup-completo-do-projeto-${{ env.TIMESTAMP }}.zip
+          parent: ${{ secrets.DRIVE_FOLDER_ID }}
