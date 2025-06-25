@@ -1,25 +1,8 @@
-log.generic;;;;;;;log.laboratory_per_user;;;;
-id;type;create_time;desc;children_logs;responsible_user;;id;laboratory_list;generic_id;user_id;
-1;create;12/06/2025 14:30;Criação do usuário Pedro Souza;"{""log_users"": 1}";1;;1;"[{""id"": 3, ""enviroment_id"": ""103AC""}, {""id"": 5, ""enviroment_id"": ""105AE""}]";13;3;
-2;update;12/06/2025 14:31;Alteração do tipo do usuário João da Silva para técnico;"{""log_users"": 2}";1;;2;"[{""id"": 3, ""enviroment_id"": ""103AC""}]";14;6;
-3;delete;12/06/2025 14:32;;"{""log_users"": 3}";1;;;;;;
-4;create;12/06/2025 14:33;Criação do laboratório 107AG;"{""log_laboratories"": 1}";1;;log.assosiation_user_laboratory;;;;
-5;update;12/06/2025 14:34;Adicionado ar condicionado ao laboratório 104AD;"{""log_laboratories"": 2}";1;;id;status;generic_id;laboratory_id;user_id
-6;delete;12/06/2025 14:35;;"{""log_laboratories"": 3}";1;;1;granted;10;1;2
-7;assosiation;12/06/2025 14:36;;"{""log_user_login_logout"": 1}";1;;2;granted;11;3;3
-8;assosiation;12/06/2025 14:37;;"{""log_user_login_logout"": 2}";1;;3;revoked;12;1;2
-9;assosiation;12/06/2025 14:38;;"{""log_user_login_logout"": 3}";1;;4;revoked;16;4;10
-10;assosiation;12/06/2025 14:39;;"{""log_assosiation_user_laboratory"": 1}";1;;5;granted;17;1;10
-11;assosiation;12/06/2025 14:40;;"{""log_assosiation_user_laboratory"": 2}";1;;;;;;
-12;assosiation;12/06/2025 14:41;;"{""log_assosiation_user_laboratory"": 3}";1;;log.user_login_logout;;;;
-13;assosiation;12/06/2025 14:42;;"{""log_laboratory_per_user"": 1}";1;;id;operation_type;session_key;generic_id;user_id
-14;assosiation;12/06/2025 14:43;;"{""log_laboratory_per_user"": 2}";1;;1;login;sess_a4d9f1b3e8c7a6b5d0f2e9c8a7b4d1e0;7;3
-15;assosiation;12/06/2025 14:44;;"{""log_user_login_logout"": 4}";1;;2;login;sess_b5e0g2c4f9d8b7c6e1g3f0d9b8c5e2f1;8;4
-16;assosiation;18/06/2025 09:14;;"{""log_assosiation_user_laboratory"": 4}";1;;3;logout;sess_a4d9f1b3e8c7a6b5d0f2e9c8a7b4d1e0;9;3
-17;assosiation;18/06/2025 09:14;;"{""log_assosiation_user_laboratory"": 5}";1;;4;login;sess_c6f1h3d5g0e9c8d7f2h4g1e0c9d6f3g2;15;7
-;;;;;;;;;;;
-log.user;;;;log.laboratory;;;;;;;
-id;generic_id;user_id;;id;generic_id;laboratory_id;;;;;
-1;1;4;;1;4;7;;;;;
-2;2;2;;2;5;4;;;;;
-3;3;8;;3;6;6;;;;;
+id,enviroment_id,qtd_computers,qtd_chairs,television,fan,air_conditioner,opening_time,closing_time, is_activated
+1,"101AA",30,30,true,true,true,"08:00:00","22:00:00", true
+2,"102AB",28,30,false,true,true,"07:30:00","18:00:00", true
+3,"103AC",40,40,true,false,true,"08:00:00","22:00:00", true
+4,"104AD",23,25,false,true,false,"13:00:00","21:00:00", false
+5,"105AE",36,35,true,true,true,"07:30:00","22:00:00", false
+6,"106AF",20,22,false,true,false,"14:00:00","20:00:00", true
+7,"107AG",38,40,true,false,true,"08:00:00","21:30:00", false

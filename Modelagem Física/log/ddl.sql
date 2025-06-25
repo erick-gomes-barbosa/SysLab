@@ -53,10 +53,10 @@ CREATE TABLE log.user(
         ON DELETE RESTRICT,
 
     -- Definição dos Campos Únicos
-    CONSTRAINT uq_log_user_generic_id   UNIQUE(generic_id),
-    CONSTRAINT uq_log_user_user_id      UNIQUE(user_id)
+    CONSTRAINT uq_log_user_generic_id   UNIQUE(generic_id)
 )
 
+DROP TABLE IF EXISTS log.laboratory
 CREATE TABLE log.laboratory(
     --Chave Primária
     id              INTEGER GENERATED ALWAYS AS IDENTITY,
@@ -82,8 +82,7 @@ CREATE TABLE log.laboratory(
         ON DELETE RESTRICT,
 
     -- Definição dos Campos Únicos
-    CONSTRAINT uq_log_laboratory_generic_id       UNIQUE(generic_id),
-    CONSTRAINT uq_log_laboratory_laboratory_id  UNIQUE(laboratory_id)
+    CONSTRAINT uq_log_laboratory_generic_id       UNIQUE(generic_id)
 )
 
 CREATE TABLE log.laboratory_per_user(

@@ -27,6 +27,9 @@ CREATE TABLE system.user (
     CONSTRAINT uq_system_user_email     UNIQUE (email)
 )
 
+ALTER TABLE system.user
+ADD COLUMN is_activated BOOLEAN NOT NULL DEFAULT TRUE
+
 CREATE TABLE system.laboratory (
     --Chaves Primárias
     id              INTEGER                     GENERATED ALWAYS AS IDENTITY,
@@ -52,6 +55,9 @@ ALTER COLUMN qty_chais SET DEFAULT 0;
 
 ALTER TABLE system.laboratory
 ALTER COLUMN qty_computers SET DEFAULT 0;
+
+ALTER TABLE system.laboratory
+ADD COLUMN is_activated BOOLEAN NOT NULL DEFAULT TRUE
 
 CREATE TABLE system.user_laboratory(
     --Chave Primária
