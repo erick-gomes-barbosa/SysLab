@@ -47,6 +47,12 @@ CREATE TABLE system.laboratory (
     CONSTRAINT uq_system_laboratory_enviroment_id   UNIQUE(enviroment_id)
 )
 
+ALTER TABLE system.laboratory
+ALTER COLUMN qty_chais SET DEFAULT 0;
+
+ALTER TABLE system.laboratory
+ALTER COLUMN qty_computers SET DEFAULT 0;
+
 CREATE TABLE system.user_laboratory(
     --Chave Primária
     id              INTEGER GENERATED ALWAYS AS IDENTITY,
