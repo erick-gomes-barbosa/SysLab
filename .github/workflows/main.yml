@@ -44,7 +44,7 @@ jobs:
 
       # 6. Upload para o Google Drive
       - name: Upload do Backup para o Google Drive
-        uses: willo32/google-drive-upload-action@v1.3.0
+        uses: willo32/google-drive-upload-action@v1.1.0
         with:
           parent-folder-id: ${{ secrets.DRIVE_FOLDER_ID }}
           file-name: backup-completo-do-projeto-${{ env.TIMESTAMP }}.zip
