@@ -44,9 +44,8 @@ jobs:
 
       # 6. Upload para a pasta do Google Drive
       - name: Upload do Backup para o Google Drive
-        uses: lgariv/google-drive-upload-git-action@v1
+        uses: adityak74/google-drive-upload-git-action@main
         with:
           credentials: ${{ secrets.CLOUD_CREDENTIALS }}
-          source: ./backup-completo-${{ env.TIMESTAMP }}.zip
-          destination: backup-completo-do-projeto-${{ env.TIMESTAMP }}.zip
-          parent: ${{ secrets.DRIVE_FOLDER_ID }}
+          filename: backup-completo-${{ env.TIMESTAMP }}.zip
+          folderId: ${{ secrets.DRIVE_FOLDER_ID }}
