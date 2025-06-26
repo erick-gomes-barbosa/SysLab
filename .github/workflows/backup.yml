@@ -42,7 +42,7 @@ jobs:
       - name: Arquivar Código e Banco de Dados
         run: zip -r backup-completo-${{ env.TIMESTAMP }}.zip . -x ".git/*" -x ".github/*"
 
-      # 6. Upload para o Google Drive
+      # 6. Upload para a pasta do Google Drive
       - name: Upload do Backup para o Google Drive
         uses: lgariv/google-drive-upload-git-action@v1
         with:
