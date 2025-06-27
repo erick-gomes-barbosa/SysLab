@@ -127,9 +127,6 @@ CREATE TABLE log.assosiation_user_laboratory(
     --Chave Primária
     id              INTEGER GENERATED ALWAYS AS IDENTITY,
 
-    --Lista de laboratórios por usuário
-    status          utils.log_enum_user_laboratory_status NOT NULL,
-
     --Chaves Estrangeiras
     generic_id      INTEGER NOT NULL,
     laboratory_id   INTEGER NOT NULL,

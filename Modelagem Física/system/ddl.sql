@@ -86,3 +86,6 @@ CREATE TABLE system.user_laboratory(
     --Definição dos Campos Únicos
     CONSTRAINT uq_system_user_laboratory_pair   UNIQUE(user_id, laboratory_id)
 )
+
+ALTER TABLE system.user_laboratory
+ADD COLUMN allowed BOOLEAN NOT NULL DEFAULT TRUE;
