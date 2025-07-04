@@ -37,7 +37,7 @@ CREATE TABLE system.laboratory (
     --Infomrações sobre o laboratório
     enviroment_id   VARCHAR(5)                  NOT NULL,
     qty_computers   INTEGER                     NOT NULL,
-    qty_chais       INTEGER                     NOT NULL,
+    qty_chairs      INTEGER                     NOT NULL,
 
     --Período de tempo de utilização do laboratório
     opening_time    utils.domain_time_period    NOT NULL,
@@ -57,7 +57,16 @@ ALTER TABLE system.laboratory
 ALTER COLUMN qty_computers SET DEFAULT 0;
 
 ALTER TABLE system.laboratory
-ADD COLUMN is_activated BOOLEAN NOT NULL DEFAULT TRUE
+ADD COLUMN is_activated BOOLEAN NOT NULL DEFAULT TRUE;
+
+ALTER TABLE system.laboratory
+ADD COLUMN television BOOLEAN NOT NULL DEFAULT FALSE;
+
+ALTER TABLE system.laboratory
+ADD COLUMN fan BOOLEAN NOT NULL DEFAULT FALSE;
+
+ALTER TABLE system.laboratory
+ADD COLUMN air_conditioner BOOLEAN NOT NULL DEFAULT FALSE;
 
 CREATE TABLE system.user_laboratory(
     --Chave Primária
