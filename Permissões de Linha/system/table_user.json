@@ -1,0 +1,113 @@
+{
+    "README": {
+        "1.0": "SOBRE ESTE ARQUIVO",
+        "1.1": "Este arquivo documenta as row-permissions da tabela 'user' do schema 'system' do projeto SysLab",
+        "1.2": "Ele possui todas as row-permissions da tabela separadas por ROLE e operações (CRUD)",
+        "1.3": "Cada tabela será registrada em um arquivo diferente à fins de organização de documento",
+
+        "2.0": "ESTRUTURA DE HIERARQUIA",
+        "2.1": "A primeira propriedade de uma hierarquia, exceto pelo README, será sempre a etiqueta de PERMISSIONS, indicando que a partir daquele ponto começa a descrição das permissões da tabela",
+        "2.2": "A segunda propriedade de uma hierarquia é o nome da tabela em questão",
+        "2.3": "A terceira propriedade de uma hierarquia sempre são os ROLEs do sistema",
+        "2.4": "A quarta propriedade de uma hierarquia sempre serão as operações (CRUD) permitidas para aquela(s) ROLE(s)",
+        "2.5": "As propiedades seguintes a partir da quarta propriedade são as configurações de permissões",
+
+        "3.0": "ORGANIZAÇÃO DE PROPRIEDADES PARA AS ROLES - 3ª PROPRIEDADE HIERÁRQUICA",
+        "3.1": "Na terceira propriedade hierárquica, existem diversas ROLEs, e aquelas que possuem maior permissão são posicionadas mais à esquerda",
+        "3.2": "Se há apenas uma ROLE na terceira propriedade hierárquica, significa que apenas aquela ROLE possui tal permissão",
+        "3.3": "Se há duas ou mais ROLES na terceira propriedade hierárquica, significa que aquela permissão é igual para todas as ROLEs",
+        "3.4": "As primeiras 'terceira propriedade' de cada tabela são as que estão atreladas à mais ROLEs, as que possuem menos ROLEs são escritas em sequência",
+        
+        "4.0": "ORGANIZAÇÃO DE PROPRIEDADES PARA AS OPERAÇÕES - 4ª PROPRIEDADE DE HIERARQUIA",
+        "4.1": "Se várias operações estiverem em uma mesma '4ª propriedade', elas devem seguir a ordem de 'insert', 'select', 'pre-update', 'pos-update', 'delete'",
+        "4.2": "As '4ªs propriedades hierárquicas' com muitas operações devem ficar ao topo das '3ªs propriedades hierárquicas' de acordo com a quantidade de operações, quanto maior o número de operações, mais acima estará a propriedade",
+        "4.3": "As operações isoladas devem seguir uma ordem dentro da '3ª propriedade', sendo os 'insert' acima dos 'select', os 'select' acima dos 'pre-update', os 'pre-updates' acima dos 'pos-update', e por fim, os 'pos-update' acima dos 'delete'",
+
+        "5.0": "ORGANIZAÇÃO DAS PROPRIEDADES PARA A CONFIGURAÇÃO DAS PERMISSÕES",
+        "5.1": "As configurações de permissão seguem a mesma sintaxe utilizada no Hasura",
+        "5.2": "Os claims das permissões devem se localizar antes de quaisquer outra permissão",
+        "5.3": "Caso haja o claim X-HASURA-USER-ID, ele deverá ser a primeira permissão, e então, dará seguimento para outras claims e então para as permissões comuns",
+        "5.4": "As propriedades que estão após os claims devem seguir a ordem que aparecerem na tabela",
+
+        "6.0": "COMO UTILIZAR ESSE ARQUIVO",
+        "6.1": "Toda row-permission escrita no Hasura deve ser documentada nesses arquivos para a realização do backup, visualização e documentação",
+        "6.2": "Você pode copiar as permissões configuradas nesse arquivo e colocá-las diretamente no Hasura",
+        "6.3": "Para enviar ao Hasura, copie a configuração da permissão a partir da abertura de chaves da 4ª permissão até o fechamento da mesma"
+    },
+
+    "PERMISSIONS": {
+        "system.user": [{
+            "adm, anon": [{
+                "insert": {
+                    "password": {
+                        "_regex": "^.{60}$"
+                    }
+                }
+            },
+            {
+                "select": {
+                    "is_activated": {
+                        "_eq": true
+                    }
+                }
+            }]
+        },
+
+
+
+        {
+            "user": [{
+                "select": {
+                    "id": {
+                        "_eq": "X-Hasura-User-Id"
+                    }
+                }
+            },
+            {
+                "pre-update": {
+                    "_and": [{
+                        "id": {
+                            "_eq": "X-Hasura-User-Id"
+                        }
+                    },
+                    {
+                        "password": {
+                            "_regex": "^.{60}$"
+                        }
+                    }]
+                }
+            }]
+        },
+
+
+
+        {
+            "adm": {
+                "pre-update": {
+                    "password": {
+                        "_regex": "^.{60}$"
+                    }
+                }
+            }
+        },
+
+
+
+        {
+            "anon": {
+                "pre-update": {
+                    "_and": [{
+                        "is_activated": {
+                            "_eq": false
+                        }
+                    },
+                    {
+                        "password": {
+                            "_regex": "^.{60}$"
+                        }
+                    }]
+                }
+            }
+        }]
+    }
+}
