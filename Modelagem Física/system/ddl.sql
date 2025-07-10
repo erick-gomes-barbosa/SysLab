@@ -25,10 +25,14 @@ CREATE TABLE system.user (
     --Definição dos Campos Únicos
     CONSTRAINT uq_system_user_registery UNIQUE (registery),
     CONSTRAINT uq_system_user_email     UNIQUE (email)
-)
+);
 
 ALTER TABLE system.user
-ADD COLUMN is_activated BOOLEAN NOT NULL DEFAULT TRUE
+ADD COLUMN is_activated BOOLEAN NOT NULL DEFAULT TRUE;
+
+-- Criação do usuário administrador estático e único
+INSERT INTO system.user(registery, type, name, email, password, entry_time, departure_time)
+VALUES (1002025001, 'Administrador', 'Administrador', 'syslab@baymetrics.com', '$2a$20$.Sb5soqLxZ8BfRu800j8LukmbpiIjNuR6yzrW/yL4UPvG.w3O2KMW', '04:00:00-03:00', '22:00:00-03:00');
 
 CREATE TABLE system.laboratory (
     --Chaves Primárias
@@ -48,10 +52,10 @@ CREATE TABLE system.laboratory (
 
     --Definição dos Campos Únicos
     CONSTRAINT uq_system_laboratory_enviroment_id   UNIQUE(enviroment_id)
-)
+);
 
 ALTER TABLE system.laboratory
-ALTER COLUMN qty_chais SET DEFAULT 0;
+ALTER COLUMN qty_chairs SET DEFAULT 0;
 
 ALTER TABLE system.laboratory
 ALTER COLUMN qty_computers SET DEFAULT 0;
@@ -68,6 +72,7 @@ ADD COLUMN fan BOOLEAN NOT NULL DEFAULT FALSE;
 ALTER TABLE system.laboratory
 ADD COLUMN air_conditioner BOOLEAN NOT NULL DEFAULT FALSE;
 
+DROP TABLE IF EXISTS system.user_laboratory;
 CREATE TABLE system.user_laboratory(
     --Chave Primária
     id              INTEGER GENERATED ALWAYS AS IDENTITY,
@@ -94,7 +99,7 @@ CREATE TABLE system.user_laboratory(
     
     --Definição dos Campos Únicos
     CONSTRAINT uq_system_user_laboratory_pair   UNIQUE(user_id, laboratory_id)
-)
+);
 
 ALTER TABLE system.user_laboratory
 ADD COLUMN allowed BOOLEAN NOT NULL DEFAULT TRUE;

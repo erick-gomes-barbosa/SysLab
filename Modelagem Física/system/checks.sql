@@ -10,10 +10,11 @@ CHECK(
     email ~ '^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$'
 );
 
+ALTER TABLE system.user DROP CONSTRAINT check_password_lenght;
 ALTER TABLE system.user
 ADD CONSTRAINT check_password_lenght
 CHECK(
-    char_length(password) = 64
+    char_length(password) = 60
 );
 
 ALTER TABLE system.user
