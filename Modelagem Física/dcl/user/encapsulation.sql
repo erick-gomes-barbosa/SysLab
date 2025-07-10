@@ -70,12 +70,13 @@ FOR EACH ROW
 EXECUTE FUNCTION system.fn_insert_t_user_r_sys_user();
 
 -- Atualização na Tabela de Usuário
+DROP VIEW IF EXISTS system.vw_update_t_user_r_sys_user;
 CREATE OR REPLACE VIEW system.vw_update_t_user_r_sys_user AS
-SELECT name, email, password, entry_time, departure_time, is_activated FROM system.user;
+SELECT id, name, email, password, entry_time, departure_time, is_activated FROM system.user;
 
 SET ROLE sys_user;
 
-DROP FUNCTION IF EXISTS system.fn_update_t_user_r_sys_user(user_id INTEGER);
+DROP FUNCTION IF EXISTS system.fn_update_t_user_r_sys_user();
 CREATE OR REPLACE FUNCTION
 system.fn_update_t_user_r_sys_user()
 RETURNS trigger AS $$
@@ -89,7 +90,7 @@ BEGIN
 		departure_time = COALESCE(NEW.departure_time, departure_time),
 		is_activated = COALESCE(NEW.is_activated, is_activated)
 	WHERE
-		id = user_id;
+		id = OLD.id;
 
 	RETURN FOUND;
 END;
