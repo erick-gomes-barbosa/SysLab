@@ -15,7 +15,7 @@ CREATE TABLE log.generic(
     children_logs       JSONB                           NULL,
 
     --Chave Estrangeira
-    responsible_user    INTEGER                     NOT NULL DEFAULT 1,
+    responsible_user    UUID		                     NOT NULL DEFAULT 'd8112b30-95aa-40dc-9745-ea4cced03cf2',
 
     --Definição da Chave Primária
     CONSTRAINT pk_log_generic       PRIMARY KEY(id),
@@ -23,7 +23,7 @@ CREATE TABLE log.generic(
     --Definição das Chaves Estrangeiras
     CONSTRAINT fk_system_user_id
         FOREIGN KEY (responsible_user)
-        REFERENCES system.user(id)
+        REFERENCES auth.users(id)
         ON UPDATE RESTRICT
         ON DELETE RESTRICT
 );
@@ -35,7 +35,7 @@ CREATE TABLE log.user(
 
     --Chaves Estrangeiras
     generic_id  INTEGER NOT NULL,
-    user_id     INTEGER NOT NULL,
+    user_id     UUID	NOT NULL,
 
     --Definição da Chave Primária
     CONSTRAINT pk_log_users     PRIMARY KEY(id),
@@ -49,7 +49,7 @@ CREATE TABLE log.user(
     
     CONSTRAINT fk_system_user_id
         FOREIGN KEY (user_id)
-        REFERENCES system.user(id)
+        REFERENCES auth.users(id)
         ON UPDATE RESTRICT
         ON DELETE RESTRICT,
 
@@ -97,7 +97,7 @@ CREATE TABLE log.laboratory_per_user(
     --Chaves Estrangeiras
     generic_id      INTEGER NOT NULL,
     laboratory_id   INTEGER NOT NULL,
-    user_id         INTEGER NOT NULL,
+    user_id         UUID	NOT NULL,
 
     --Definição da Chave Primária
     CONSTRAINT pk_log_laboratory_per_user     PRIMARY KEY(id),
@@ -117,7 +117,7 @@ CREATE TABLE log.laboratory_per_user(
 
     CONSTRAINT fk_system_user_id
         FOREIGN KEY (user_id)
-        REFERENCES system.user(id)
+        REFERENCES auth.users(id)
         ON UPDATE RESTRICT
         ON DELETE RESTRICT,
 
@@ -133,7 +133,7 @@ CREATE TABLE log.assosiation_user_laboratory(
     --Chaves Estrangeiras
     generic_id      INTEGER NOT NULL,
     laboratory_id   INTEGER NOT NULL,
-    user_id         INTEGER NOT NULL,
+    user_id         UUID	NOT NULL,
 
     --Definição da Chave Primária
     CONSTRAINT pk_log_assosiation_user_laboratory     PRIMARY KEY(id),
@@ -153,7 +153,7 @@ CREATE TABLE log.assosiation_user_laboratory(
 
     CONSTRAINT fk_system_user_id
         FOREIGN KEY (user_id)
-        REFERENCES system.user(id)
+        REFERENCES auth.users(id)
         ON UPDATE RESTRICT
         ON DELETE RESTRICT,
 
@@ -172,7 +172,7 @@ CREATE TABLE log.user_login_logout(
 
     --Chaves Estrangeiras
     generic_id      INTEGER NOT NULL,
-    user_id         INTEGER NOT NULL,
+    user_id         UUID	NOT NULL,
 
     --Definição da Chave Primária
     CONSTRAINT pk_log_user_login_logout     PRIMARY KEY(id),
@@ -186,7 +186,7 @@ CREATE TABLE log.user_login_logout(
     
     CONSTRAINT fk_system_user_id
         FOREIGN KEY (user_id)
-        REFERENCES system.user(id)
+        REFERENCES auth.users(id)
         ON UPDATE RESTRICT
         ON DELETE RESTRICT,
 
