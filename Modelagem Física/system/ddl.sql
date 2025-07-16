@@ -1,39 +1,6 @@
 DROP SCHEMA IF EXISTS system CASCADE;
 CREATE SCHEMA system;
 
--- Tabela de armazenamento dos dados dos usuários do sistema
-CREATE TABLE system.user (
-    -- Chaves Primárias
-    id              INTEGER                     GENERATED ALWAYS AS IDENTITY,
-
-    -- Informações sobre o Usuário
-    registery       INTEGER                     NOT NULL,
-    type            VARCHAR(20)                 NOT NULL,
-    name            VARCHAR(60)                 NOT NULL,
-    
-    --Informações de Entrada
-    email           VARCHAR(50)                 NOT NULL,
-    password        VARCHAR(64)                 NOT NULL,
-
-    --Período de tempo de atuação do usuário
-    entry_time      utils.domain_time_period   NOT NULL,
-    departure_time  utils.domain_time_period   NOT NULL,
-
-    --Definição das Chaves Primárias
-    CONSTRAINT pk_system_user           PRIMARY KEY(id),
-
-    --Definição dos Campos Únicos
-    CONSTRAINT uq_system_user_registery UNIQUE (registery),
-    CONSTRAINT uq_system_user_email     UNIQUE (email)
-);
-
-ALTER TABLE system.user
-ADD COLUMN is_activated BOOLEAN NOT NULL DEFAULT TRUE;
-
--- Criação do usuário administrador estático e único
-INSERT INTO system.user(registery, type, name, email, password, entry_time, departure_time)
-VALUES (1002025001, 'Administrador', 'Administrador', 'syslab@baymetrics.com', '$2a$20$.Sb5soqLxZ8BfRu800j8LukmbpiIjNuR6yzrW/yL4UPvG.w3O2KMW', '04:00:00-03:00', '22:00:00-03:00');
-
 CREATE TABLE system.laboratory (
     --Chaves Primárias
     id              INTEGER                     GENERATED ALWAYS AS IDENTITY,
@@ -78,7 +45,7 @@ CREATE TABLE system.user_laboratory(
     id              INTEGER GENERATED ALWAYS AS IDENTITY,
 
     --Chaves Estrangeiras
-    user_id         INTEGER NOT NULL,
+    user_id         UUID NOT NULL,
     laboratory_id   INTEGER NOT NULL,
 
     --Definição da Chave Primária
@@ -87,7 +54,7 @@ CREATE TABLE system.user_laboratory(
     --Definição das Chaves Estrangeiras
     CONSTRAINT fk_system_user_id
         FOREIGN KEY (user_id)
-        REFERENCES system.user(id)
+        REFERENCES auth.users(id)
         ON UPDATE CASCADE
         ON DELETE CASCADE,
 
