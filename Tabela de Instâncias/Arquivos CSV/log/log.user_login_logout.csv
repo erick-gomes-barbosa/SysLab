@@ -1,5 +1,0 @@
-id,generic_id,user_id,operation_type,session_key
-1,7,3,login,"sess_a4d9f1b3e8c7a6b5d0f2e9c8a7b4d1e0"
-2,8,4,login,"sess_b5e0g2c4f9d8b7c6e1g3f0d9b8c5e2f1"
-3,9,3,logout,"sess_a4d9f1b3e8c7a6b5d0f2e9c8a7b4d1e0"
-4,15,7,login,"sess_c6f1h3d5g0e9c8d7f2h4g1e0c9d6f3g2"
